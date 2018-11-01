@@ -10,7 +10,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name='pysflow',
     url='https://github.com/reening/pysflow',
-    version='0.0.2',
+    version='0.0.4',
     license='BSD 3-clause "New" or "Revised License"',
 
     packages=['sflow', ],
