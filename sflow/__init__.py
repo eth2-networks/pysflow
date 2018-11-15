@@ -1,1 +1,2 @@
-name = "sflow"
+import sflow.counters  # noqa
+import sflow.flows  # noqa
