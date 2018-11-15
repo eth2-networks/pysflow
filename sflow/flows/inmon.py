@@ -12,7 +12,7 @@ class SampledHeader(BaseFlowData):
     ]
 
 
-class ExtendedSwitchData(BaseFlowData):
+class ExtendedSwitch(BaseFlowData):
     __format__ = (0, 1001)
     __struct__ = [
         ('src_vlan', UInt),
@@ -22,7 +22,7 @@ class ExtendedSwitchData(BaseFlowData):
     ]
 
 
-class ExtendedRouterData(BaseFlowData):
+class ExtendedRouter(BaseFlowData):
     __format__ = (0, 1002)
     __struct__ = [
         ('nexthop', Address),
@@ -31,7 +31,7 @@ class ExtendedRouterData(BaseFlowData):
     ]
 
 
-class ExtendedGatewayData(BaseFlowData):
+class ExtendedGateway(BaseFlowData):
     __format__ = (0, 1003)
     __struct__ = [
         ('nexthop', Address),
