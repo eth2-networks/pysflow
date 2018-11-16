@@ -3,14 +3,14 @@ from os import path
 
 
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+with open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
 setup(
     name='pysflow',
     url='https://github.com/reening/pysflow',
-    version='0.0.4',
+    version='0.1.1',
     license='BSD 3-clause "New" or "Revised License"',
 
     packages=['sflow', ],
@@ -21,7 +21,7 @@ setup(
 
     description="sFlow parser, written in Python",
     long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description_content_type='text/x-rst',
 
     classifiers=[
         'Development Status :: 1 - Planning',
