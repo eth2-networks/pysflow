@@ -1,5 +1,5 @@
 from sflow.base import BaseFlowData
-from sflow.types import Array, UInt, Opaque
+from sflow.types import Array, Int, UInt, String, Opaque
 from sflow.types import ASPath, Address, Community, HexOpaque, IPv4, IPv6, MAC
 
 
@@ -90,4 +90,70 @@ class ExtendedUser(BaseFlowData):
         ('src_user', Opaque),
         ('dst_charset', UInt),
         ('dst_user', Opaque),
+    ]
+
+
+class ExtendedURL(BaseFlowData):
+    __format__ = (0, 1005)
+    __struct__ = [
+        ('direction', UInt),
+        ('url', String),
+        ('host', String),
+    ]
+
+
+class ExtendedMPLS(BaseFlowData):
+    __format__ = (0, 1006)
+    __struct__ = [
+        ('nexthop', Address),
+        ('in_stack', Array(Int)),
+        ('out_stack', Array(Int)),
+    ]
+
+
+class ExtendedNAT(BaseFlowData):
+    __format__ = (0, 1007)
+    __struct__ = [
+        ('src_address', Address),
+        ('dst_address', Address),
+    ]
+
+
+class ExtendedMPLSTunnel(BaseFlowData):
+    __format__ = (0, 1008)
+    __struct__ = [
+        ('tunnel_lsp_name', String),
+        ('tunnel_id', UInt),
+        ('tunnel_cos', UInt),
+    ]
+
+
+class ExtendedMPLSVC(BaseFlowData):
+    __format__ = (0, 1009)
+    __struct__ = [
+        ('vc_instance_name', String),
+        ('vll_vc_id', UInt),
+        ('vc_label_cos', UInt),
+    ]
+
+
+class ExtendedMPLSFEC(BaseFlowData):
+    __format__ = (0, 1010)
+    __struct__ = [
+        ('mplsFTNDescr', String),
+        ('mplsFTNMask', UInt),
+    ]
+
+
+class ExtendedMPLSLDPFEC(BaseFlowData):
+    __format__ = (0, 1011)
+    __struct__ = [
+        ('mplsFecAddrPrefixLength', UInt),
+    ]
+
+
+class ExtendedVLANTunnel(BaseFlowData):
+    __format__ = (0, 1012)
+    __struct__ = [
+        ('stack', Array(UInt)),
     ]

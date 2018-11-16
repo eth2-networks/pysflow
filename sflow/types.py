@@ -4,6 +4,12 @@ import ipaddress
 from sflow.base import Base, BaseStruct
 
 
+class Int(Base):
+    @staticmethod
+    def decode(unpacker):
+        return unpacker.unpack_int()
+
+
 class UInt(Base):
     @staticmethod
     def decode(unpacker):
@@ -14,6 +20,12 @@ class UHyper(Base):
     @staticmethod
     def decode(unpacker):
         return unpacker.unpack_uhyper()
+
+
+class String(Base):
+    @staticmethod
+    def decode(unpacker):
+        return unpacker.unpack_string()
 
 
 class Opaque(Base):
