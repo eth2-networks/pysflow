@@ -1,4 +1,5 @@
 from distutils.core import setup
+from setuptools import find_packages
 from os import path
 
 
@@ -10,10 +11,10 @@ with open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='pysflow',
     url='https://github.com/reening/pysflow',
-    version='0.1.1',
+    version='0.1.2',
     license='BSD 3-clause "New" or "Revised License"',
 
-    packages=['sflow', ],
+    packages=find_packages(),
     include_package_data=True,
 
     author="Martijn Reening",
