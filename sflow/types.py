@@ -40,35 +40,47 @@ class Array(object):
         return unpacker.unpack_array(lambda: self._decode_item(unpacker))
 
 
-class Address(Base):
-    UNKNOWN = 0
-    IP_V4 = 1
-    IP_V6 = 2
-
+class IPv4(Base):
     @staticmethod
-    def _decode_ipv4(unpacker):
+    def decode(unpacker):
         address = unpacker.unpack_fopaque(4)
 
         return '.'.join(map(str, address))
 
+
+class IPv6(Base):
     @staticmethod
-    def _decode_ipv6(unpacker):
+    def decode(unpacker):
         address = unpacker.unpack_fopaque(16)
 
         return str(ipaddress.ip_address(address))
+
+
+class Address(Base):
+    UNKNOWN = 0
+    IP_V4 = 1
+    IP_V6 = 2
 
     @classmethod
     def decode(cls, unpacker):
         address_type = unpacker.unpack_uint()
 
         if address_type == cls.IP_V4:
-            return cls._decode_ipv4(unpacker)
+            return IPv4.decode(unpacker)
         elif address_type == cls.IP_V6:
-            return cls._decode_ipv6(unpacker)
+            return IPv6.decode(unpacker)
         else:
             raise TypeError('Unknown address type: {}'.format(address_type))
 
         return address_type
+
+
+class MAC(Base):
+    @staticmethod
+    def decode(unpacker):
+        address = unpacker.unpack_fopaque(6)
+
+        return '{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}'.format(*address)
 
 
 class ASPath(BaseStruct):

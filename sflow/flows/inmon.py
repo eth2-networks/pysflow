@@ -1,5 +1,6 @@
 from sflow.base import BaseFlowData
-from sflow.types import ASPath, Address, Array, Community, HexOpaque, UInt
+from sflow.types import Array, UInt, Opaque
+from sflow.types import ASPath, Address, Community, HexOpaque, IPv4, IPv6, MAC
 
 
 class SampledHeader(BaseFlowData):
@@ -9,6 +10,44 @@ class SampledHeader(BaseFlowData):
         ('frame_length', UInt),
         ('stripped', UInt),
         ('header', HexOpaque),
+    ]
+
+
+class SampledEthernet(BaseFlowData):
+    __format__ = (0, 2)
+    __struct__ = [
+        ('length', UInt),
+        ('src_mac', MAC),
+        ('dst_mac', MAC),
+        ('type', UInt),
+    ]
+
+
+class SampledIPv4(BaseFlowData):
+    __format__ = (0, 3)
+    __struct__ = [
+        ('length', UInt),
+        ('protocol', UInt),
+        ('src_ip', IPv4),
+        ('dst_ip', IPv4),
+        ('src_port', UInt),
+        ('dst_port', UInt),
+        ('tcp_flags', UInt),
+        ('tos', UInt),
+    ]
+
+
+class SampledIPv6(BaseFlowData):
+    __format__ = (0, 4)
+    __struct__ = [
+        ('length', UInt),
+        ('protocol', UInt),
+        ('src_ip', IPv6),
+        ('dst_ip', IPv6),
+        ('src_port', UInt),
+        ('dst_port', UInt),
+        ('tcp_flags', UInt),
+        ('priority', UInt),
     ]
 
 
@@ -41,4 +80,14 @@ class ExtendedGateway(BaseFlowData):
         ('dst_as_path', Array(ASPath)),
         ('communities', Array(Community)),
         ('localpref', UInt),
+    ]
+
+
+class ExtendedUser(BaseFlowData):
+    __format__ = (0, 1004)
+    __struct__ = [
+        ('src_charset', UInt),
+        ('src_user', Opaque),
+        ('dst_charset', UInt),
+        ('dst_user', Opaque),
     ]
